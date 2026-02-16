@@ -20,10 +20,25 @@ export default function Footer({ menuItems = [] }) {
             <Typography variant="body2" className={classes.brandText}>
               {site.description}
             </Typography>
-            <div className={classes.euLogos}>
-            <Image src="/images/funded-eu-hr.svg" alt="Financira Europska Unija" width={200} height={80} className={classes.euLogo} />
-            <Image src="/images/funded-eu-en.svg" alt="Funded by the European Union" width={200} height={80} className={classes.euLogo} />
-            </div>
+           <div className={classes.euLogos}>
+  <Image
+    src="/images/funded-eu-hr.svg"
+    alt="Financira Europska Unija"
+    width={200}
+    height={80}
+    sizes="(max-width: 900px) 45vw, 200px"
+    className={classes.euLogo}
+  />
+  <Image
+    src="/images/funded-eu-en.svg"
+    alt="Funded by the European Union"
+    width={200}
+    height={80}
+    sizes="(max-width: 900px) 45vw, 200px"
+    className={classes.euLogo}
+  />
+</div>
+
             
           </div>
 
@@ -57,9 +72,6 @@ export default function Footer({ menuItems = [] }) {
         </div>
 
         <div className={classes.bottom}>
-         {/*  <Typography variant="body2" className={classes.copy}>
-            © {new Date().getFullYear()} {site.footer?.copyright?.owner || "Faculty of Maritime Studies, University of Split"}
-          </Typography> */}
            <Typography variant="body2" className={classes.copy}>
             © {new Date().getFullYear()} {site.footer?.copyright?.vlasnik}
           </Typography>
