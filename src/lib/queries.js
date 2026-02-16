@@ -73,7 +73,7 @@ export const ALL_NEWS = `
 `;
 
 export const POST_BY_SLUG = `
-  query PostBySlug($slug: String!, $terms: [String!]!) {
+  query PostBySlug($slug: ID!, $terms: [String!]!) {
     post(id: $slug, idType: SLUG) {
       id
       title
@@ -81,12 +81,25 @@ export const POST_BY_SLUG = `
       modified
       featuredImage { node { sourceUrl altText } }
       blocks(attributes: true, dynamicContent: true)
-      projectSites(where: { slugIn: $terms }) {
+      projectSites(where: { slug: $terms }) {
         nodes { slug }
       }
     }
   }
 `;
+
+/* export const POST_BY_SLUG = `
+  query PostBySlug($slug: ID!) {
+    post(id: $slug, idType: SLUG) {
+      id
+      title
+      date
+      modified
+      featuredImage { node { sourceUrl altText } }
+      blocks(attributes: true, dynamicContent: true)
+    }
+  }
+`; */
 
 export const ALL_PAGES = `
   query AllPages($first: Int = 200, $terms: [String!]!) {
@@ -167,9 +180,9 @@ export const PAGE_BY_PATH = `
         }
       }
       blocks(attributes: true, dynamicContent: true)
-      projectSites(where: { slugIn: $terms }) {
+      projectSites(where: { slug: $terms }) {
         nodes { slug }
-      }
+      } 
     }
   }
 `;

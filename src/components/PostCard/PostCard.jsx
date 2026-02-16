@@ -7,7 +7,7 @@ import dayjs from "dayjs";
 export default function PostCard({ slug, title, date }) {
   return (
     <Card variant="outlined" sx={{ height: "100%" }}>
-      <CardActionArea component={Link} href={`/news/${slug}`} sx={{ height: "100%", alignItems: "stretch" }}>
+      <CardActionArea component={Link} href={`/novosti/${slug}`} sx={{ height: "100%", alignItems: "stretch" }}>
         <CardContent sx={{ display: "flex", flexDirection: "column", gap: 1.25 }}>
           <Typography variant="overline" color="text.secondary">
             {date ? dayjs(date).format("D MMM YYYY") : ""}
@@ -19,7 +19,7 @@ export default function PostCard({ slug, title, date }) {
 
           <Box sx={{ mt: "auto", pt: 1 }}>
             <Typography component="span" sx={{ fontWeight: 600 }}>
-              Read more →
+              Pročitaj vijest →
             </Typography>
           </Box>
         </CardContent>

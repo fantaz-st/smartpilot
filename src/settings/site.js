@@ -15,46 +15,31 @@ header: {
 
   hero: {
     variant: "background",
-    height: { desktop: "100vh", mobile: "70vh" },
+    height: { desktop: "70vh", mobile: "70vh" },
     background: { type: "image", src: "/images/hero-smartpilot.png", alt: "SmartPilot hero" },
-    overlay: { enabled: true, gradient: "linear-gradient(to bottom, rgba(0,0,0,0.15), rgba(0,0,0,0.75))" },
+    overlay: { enabled: true, gradient: "linear-gradient(to bottom, rgba(0,0,0,0.15), rgba(0,0,0,0.45))" },
     content: {
-      kicker: "SMARTPILOT",
-      title: "Digital Pilotage for Small Craft",
+      kicker: "projekt",
+      title: "SMARTPILOT",
       subtitle:
-        "Interdisciplinary contribution to digitalization of maritime information systems and safe navigation.",
+        "Digitalni peljar i interaktivni sustav za navigaciju i peljarenje malih plovila",
     },
 
     align: { vertical: "center", horizontal: "left" },
   },
 
   footer: {
-  variant: "simple", // future-proof
+  variant: "simple",
 
   summary: {
     title: "SmartPilot",
     text: "Digitalni peljar i interaktivni sustav za navigaciju i peljarenje malih plovila.",
   },
 
-  columns: [
-    {
-      title: "Project",
-      links: [
-        { label: "Home", href: "/" },
-        { label: "News", href: "/news" },
-        { label: "Project", href: "/Project" },
-        { label: "About", href: "/about" },
-        { label: "Contact", href: "/contact" },
-      ],
-    },
-    {
-      title: "Links",
-      links: [
+ links: [
         { label: "PFST", href: "https://www.pfst.unist.hr" },
         { label: "University of Split", href: "https://www.unist.hr" },
       ],
-    },
-  ],
 
   bottomLinks: [
     { label: "Privacy", href: "/privacy" },
@@ -63,6 +48,7 @@ header: {
 
   copyright: {
     owner: "Faculty of Maritime Studies, University of Split",
+    vlasnik:"Sveučilište u Splitu, Pomorski fakultet",
     year: "auto",
   },
 },

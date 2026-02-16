@@ -74,17 +74,17 @@ export default function Hero() {
         <div className={`${classes.content} ${alignClass}`}>
           <Stack spacing={2} className={classes.stack}>
             {kicker ? (
-              <Typography className={classes.kicker} component="div">
+              <Typography className={classes.kicker} component="div" data-aos="fade-up" >
                 {kicker}
               </Typography>
             ) : null}
 
-            <Typography variant="h1" component="h1" className={classes.title}>
+            <Typography variant="h1" component="h1" className={classes.title} data-aos="fade-up" data-aos-delay={kicker ? "100" : "0"}>
               {title}
             </Typography>
 
             {subtitle ? (
-              <Typography variant="body1" component="p" className={classes.subtitle}>
+              <Typography variant="body1" component="p" className={classes.subtitle} data-aos="fade-up" data-aos-delay={kicker ? "200" : "100"}>
                 {subtitle}
               </Typography>
             ) : null}

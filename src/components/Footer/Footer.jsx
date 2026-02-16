@@ -2,13 +2,11 @@ import site from "@/settings/site";
 import classes from "./Footer.module.css";
 import Link from "next/link";
 import { Container, Typography } from "@mui/material";
+import Image from "next/image";
 
 export default function Footer({ menuItems = [] }) {
   const topLevelLinks = menuItems || [];
-  const externalLinks = site.footer?.links || [
-    { label: "PFST", href: "https://www.pfst.unist.hr" },
-    { label: "University of Split", href: "https://www.unist.hr" },
-  ];
+  const externalLinks = site.footer?.links;
 
   return (
     <footer className={classes.wrap}>
@@ -22,6 +20,11 @@ export default function Footer({ menuItems = [] }) {
             <Typography variant="body2" className={classes.brandText}>
               {site.description}
             </Typography>
+            <div className={classes.euLogos}>
+            <Image src="/images/funded-eu-hr.svg" alt="Financira Europska Unija" width={200} height={80} className={classes.euLogo} />
+            <Image src="/images/funded-eu-en.svg" alt="Funded by the European Union" width={200} height={80} className={classes.euLogo} />
+            </div>
+            
           </div>
 
           <div className={classes.col}>
@@ -54,8 +57,11 @@ export default function Footer({ menuItems = [] }) {
         </div>
 
         <div className={classes.bottom}>
-          <Typography variant="body2" className={classes.copy}>
+         {/*  <Typography variant="body2" className={classes.copy}>
             © {new Date().getFullYear()} {site.footer?.copyright?.owner || "Faculty of Maritime Studies, University of Split"}
+          </Typography> */}
+           <Typography variant="body2" className={classes.copy}>
+            © {new Date().getFullYear()} {site.footer?.copyright?.vlasnik}
           </Typography>
 
           <div className={classes.bottomLinks}>
