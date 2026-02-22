@@ -1,13 +1,8 @@
 import "@/styles/reset.css";
 import "@/styles/globals.css";
+import { Inter, DM_Serif_Display } from "next/font/google";
 import Providers from "./providers";
 import site from "@/settings/site";
-import { Inter, DM_Serif_Display } from "next/font/google";
-
-import { wpFetchAllMenuItems } from "@/lib/wpFetchAllMenuItems";
-import createDataTree from "@/functions/createDataTree";
-import Header from "@/components/Header/Header";
-import Footer from "@/components/Footer/Footer";
 import BackToTop from "@/components/BackToTop/BackToTop";
 
 const inter = Inter({
@@ -30,15 +25,12 @@ export const metadata = {
 
 export default async function RootLayout({ children }) {
 
-  const menuItems = await wpFetchAllMenuItems();
 
   return (
-    <html lang={site.locale} className={`${inter.variable} ${dmSerif.variable}`} suppressHydrationWarning>
+    <html className={`${inter.variable} ${dmSerif.variable}`} suppressHydrationWarning>
       <body>
         <Providers>
-        <Header menuItems={menuItems} />
-        {children}
-        <Footer menuItems={menuItems}/>
+       {children}
         <BackToTop />
         </Providers >
       </body>

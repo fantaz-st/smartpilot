@@ -10,8 +10,9 @@ import CloseIcon from "@mui/icons-material/Close";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import { useEffect, useMemo, useState } from "react";
 import createDataTree from "@/functions/createDataTree";
+import LanguageSwitch from "../LanguageSwitch/LanguageSwitch";
 
-const Header = ({ menuItems = [] }) => {
+const Header = ({ menuItems = [], locale }) => {
   const [open, setOpen] = useState(false);
   const [expanded, setExpanded] = useState({});
   const [scrolled, setScrolled] = useState(false);
@@ -97,6 +98,7 @@ const Header = ({ menuItems = [] }) => {
             );
           })}
         </nav>
+        <LanguageSwitch locale={locale}/>
 
         <div className={classes.menuMobile}>
           <IconButton aria-label="Open menu" onClick={openDrawer} className={classes.iconBtn}>
