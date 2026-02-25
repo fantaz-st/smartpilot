@@ -30,8 +30,8 @@ export default async function RootLayout({ children }) {
     <html className={`${inter.variable} ${dmSerif.variable}`} suppressHydrationWarning>
       <body>
         <Providers>
-       {children}
-        <BackToTop />
+          {children}
+          <BackToTop />
         </Providers >
       </body>
     </html>

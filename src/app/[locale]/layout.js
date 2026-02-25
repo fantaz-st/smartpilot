@@ -1,27 +1,21 @@
-
-
-
-import { notFound } from "next/navigation";
-import { i18n } from "@/settings/i18n";
+import site from "@/settings/site";
+import { wpFetchAllMenuItems } from "@/lib/wpFetchAllMenuItems";
+import createDataTree from "@/functions/createDataTree";
 import Header from "@/components/Header/Header";
 import Footer from "@/components/Footer/Footer";
-import { wpFetchAllMenuItems } from "@/lib/wpFetchAllMenuItems";
-import LocaleSync from "@/components/LocaleSync/LocaleSync";
 
 export default async function LocaleLayout({ children, params }) {
   const { locale } = await params;
-  if (!i18n.locales.includes(locale)) return notFound();
-  const menuItems = await wpFetchAllMenuItems();
+  const menuName = site.menu?.[locale] || site.menu?.hr || site.menu;
+
+  const flat = await wpFetchAllMenuItems(menuName);
+  const menuItems = createDataTree(flat);
 
   return (
     <>
-    <div className="main-wrapper">
-          <LocaleSync locale={locale} />
-          <Header menuItems={menuItems} locale={locale} />
-        {children}
-        <Footer menuItems={menuItems}/>
-        </div>
-
+      <Header menuItems={menuItems} locale={locale} />
+      {children}
+      <Footer menuItems={menuItems} locale={locale} />
     </>
   );
 }

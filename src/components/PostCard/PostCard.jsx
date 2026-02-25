@@ -4,7 +4,8 @@ import Link from "next/link";
 import { Card, CardActionArea, CardContent, Typography, Box } from "@mui/material";
 import dayjs from "dayjs";
 
-export default function PostCard({ slug, title, date }) {
+export default function PostCard({ slug, title, date, locale = "hr" }) {
+  const base = locale === "hr" ? "/hr/novosti" : "/en/news";
   return (
     <Card variant="outlined" sx={{ height: "100%" }}>
       <CardActionArea component={Link} href={`/novosti/${slug}`} sx={{ height: "100%", alignItems: "stretch" }}>
@@ -19,7 +20,7 @@ export default function PostCard({ slug, title, date }) {
 
           <Box sx={{ mt: "auto", pt: 1 }}>
             <Typography component="span" sx={{ fontWeight: 600 }}>
-              Pročitaj vijest →
+              {base === "hr" ? "Pročitaj vijest →" : "Read more →"}
             </Typography>
           </Box>
         </CardContent>

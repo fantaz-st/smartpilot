@@ -1,10 +1,11 @@
 export const LATEST_POSTS = `
-  query Latest($first: Int = 6, $terms: [String!]!) {
+  query Latest($first: Int = 6, $terms: [String!]!, $lang: LanguageCodeFilterEnum!) {
     posts(
       first: $first
       where: {
         status: PUBLISH
         orderby: { field: DATE, order: DESC }
+        language: $lang
         taxQuery: {
           taxArray: [
             { taxonomy: PROJECTSITE, field: SLUG, terms: $terms, operator: IN }
@@ -13,12 +14,17 @@ export const LATEST_POSTS = `
       }
     ) {
       nodes {
+        id
         slug
+        uri
         title
         date
         excerpt
-        projectSites {
-          nodes { slug }
+        language { slug }
+        translations {
+          slug
+          uri
+          language { slug }
         }
       }
     }
@@ -35,7 +41,8 @@ export const ALL_NEWS = `
     $year: Int,
     $month: Int,
     $order: OrderEnum = DESC,
-    $terms: [String!]!
+    $terms: [String!]!,
+    $lang: LanguageCodeFilterEnum!
   ) {
     posts(
       first: $first
@@ -47,6 +54,7 @@ export const ALL_NEWS = `
         categoryName: $category
         tag: $tag
         dateQuery: { year: $year, month: $month }
+        language: $lang
         taxQuery: {
           taxArray: [
             { taxonomy: PROJECTSITE, field: SLUG, terms: $terms, operator: IN }
@@ -58,31 +66,45 @@ export const ALL_NEWS = `
       nodes {
         id
         slug
+        uri
         title
         date
         excerpt
-        featuredImage { node { sourceUrl altText mediaDetails { width height } } }
-        categories { nodes { name slug } }
-        tags { nodes { name slug } }
-        projectSites {
-          nodes { slug }
-        }
       }
     }
   }
 `;
 
 export const POST_BY_SLUG = `
-  query PostBySlug($slug: ID!, $terms: [String!]!) {
-    post(id: $slug, idType: SLUG) {
-      id
-      title
-      date
-      modified
-      featuredImage { node { sourceUrl altText } }
-      blocks(attributes: true, dynamicContent: true)
-      projectSites(where: { slug: $terms }) {
-        nodes { slug }
+  query PostBySlug($slug: String!, $terms: [String!]!, $lang: LanguageCodeFilterEnum!) {
+    posts(
+      first: 1
+      where: {
+        status: PUBLISH
+        language: $lang
+        name: $slug
+        taxQuery: {
+          taxArray: [
+            { taxonomy: PROJECTSITE, field: SLUG, terms: $terms, operator: IN }
+          ]
+        }
+      }
+    ) {
+      nodes {
+        id
+        slug
+        uri
+        title
+        date
+        modified
+        featuredImage { node { sourceUrl altText } }
+        blocks(attributes: true, dynamicContent: true)
+        language { slug }
+        translations {
+          slug
+          uri
+          language { slug }
+        }
       }
     }
   }
@@ -102,11 +124,12 @@ export const POST_BY_SLUG = `
 `; */
 
 export const ALL_PAGES = `
-  query AllPages($first: Int = 200, $terms: [String!]!) {
+  query AllPages($first: Int = 200, $terms: [String!]!, $lang: LanguageCodeFilterEnum!) {
     pages(
       first: $first
       where: {
         status: PUBLISH
+        language: $lang
         taxQuery: {
           taxArray: [
             { taxonomy: PROJECTSITE, field: SLUG, terms: $terms, operator: IN }
@@ -115,13 +138,17 @@ export const ALL_PAGES = `
       }
     ) {
       nodes {
+        id
         slug
-        title
         uri
+        title
         databaseId
         parentDatabaseId
-        projectSites {
-          nodes { slug }
+        language { slug }
+        translations {
+          uri
+          slug
+          language { slug }
         }
       }
     }
@@ -158,9 +185,20 @@ export const PAGE_BY_PATH = `
   query PageByPath($path: ID!, $terms: [String!]!) {
     page(id: $path, idType: URI) {
       id
+      slug
+      uri
       title
       modified
       featuredImage { node { sourceUrl altText } }
+      blocks(attributes: true, dynamicContent: true)
+
+      language { slug }
+      translations {
+        uri
+        slug
+        language { slug }
+      }
+
       ancestors {
         nodes {
           ... on Page {
@@ -170,6 +208,7 @@ export const PAGE_BY_PATH = `
           }
         }
       }
+
       children {
         nodes {
           ... on Page {
@@ -179,10 +218,8 @@ export const PAGE_BY_PATH = `
           }
         }
       }
-      blocks(attributes: true, dynamicContent: true)
-      projectSites(where: { slug: $terms }) {
-        nodes { slug }
-      } 
+
+      projectSites(where: { slug: $terms }) { nodes { slug } }
     }
   }
 `;

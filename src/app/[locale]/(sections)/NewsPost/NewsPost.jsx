@@ -6,17 +6,18 @@ import BlockRenderer from "@/components/BlockRenderer/BlockRenderer";
 import Image from "next/image";
 import classes from "./NewsPost.module.css";
 import { fmtDate } from "@/functions/date";
+import { wpLangFromLocale } from "@/lib/lang";
 
 export const revalidate = 300;
 
 export default async function NewsPost({ params, backHref, backLabel }) {
-  const { slug } = await params;
+  const { slug, locale } = await params;
 
   const siteKey = process.env.SITE_KEY;
   if (!siteKey) throw new Error("Missing SITE_KEY env var");
 
-  const data = await wpFetch(POST_BY_SLUG, { slug, terms: [siteKey] });
-  const p = data?.post;
+  const data = await wpFetch(POST_BY_SLUG, { slug, terms: [siteKey], lang: wpLangFromLocale(locale) });
+  const p = data?.posts?.nodes?.[0];
   if (!p) return notFound();
 
   const blocks = Array.isArray(p.blocks) ? p.blocks : typeof p.blocks === "string" ? JSON.parse(p.blocks) : [];

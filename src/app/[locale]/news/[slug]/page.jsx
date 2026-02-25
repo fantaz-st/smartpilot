@@ -1,5 +1,5 @@
 import NewsPost from "../../(sections)/NewsPost/NewsPost";
 
 export default async function NovostPage(props) {
-  return <NewsPost params={props.params} backHref="../novosti" backLabel="Novosti" />;
+  return <NewsPost params={props.params} backHref="../news" backLabel="News" />;
 }

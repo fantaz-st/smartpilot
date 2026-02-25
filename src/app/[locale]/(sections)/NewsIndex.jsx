@@ -2,10 +2,11 @@ import { wpFetch } from "@/lib/wpFetch";
 import { ALL_NEWS } from "@/lib/queries";
 import { Box, Container, Typography } from "@mui/material";
 import NewsGrid from "./components/NewsGrid/NewsGrid";
+import { wpLangFromLocale } from "@/lib/lang";
 
 export const revalidate = 300;
 
-export default async function NewsIndex({ title }) {
+export default async function NewsIndex({ title, locale }) {
   const siteKey = process.env.SITE_KEY;
   if (!siteKey) throw new Error("Missing SITE_KEY env var");
 
@@ -19,6 +20,7 @@ export default async function NewsIndex({ title }) {
     month: null,
     order: "DESC",
     terms: [siteKey],
+    lang: wpLangFromLocale(locale),
   });
 
   const posts = data?.posts?.nodes || [];
