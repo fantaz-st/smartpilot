@@ -1,0 +1,85 @@
+.wrap {
+  width: 100%;
+}
+
+.container {
+  padding-bottom: 0;
+}
+
+.panel {
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: 1.2fr 0.8fr;
+  gap: 28px;
+  align-items: stretch;
+}
+
+.left {
+  padding: 4px 4px 8px;
+}
+
+.title {
+  margin: 0;
+  color: #0b1f2a;
+  letter-spacing: -0.02em;
+}
+
+.text {
+  margin-top: 14px;
+  max-width: 72ch;
+}
+
+.p {
+  margin-top: 12px;
+  line-height: 1.85;
+}
+
+.ctaLink {
+  display: inline-flex;
+  margin-top: 18px;
+  text-decoration: none;
+}
+
+.cta {
+  border-radius: 999px;
+  padding: 10px 14px;
+}
+
+.right {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.art {
+  width: 100%;
+  height: 100%;
+  min-height: 220px;
+  border-radius: 16px;
+  background:
+    radial-gradient(700px 220px at 30% 20%, rgba(0, 102, 204, 0.18), transparent 55%), radial-gradient(600px 200px at 80% 60%, rgba(0, 160, 255, 0.14), transparent 55%),
+    rgba(255, 255, 255, 0.6);
+  border: 1px solid rgba(11, 31, 42, 0.08);
+  position: relative;
+  overflow: hidden;
+}
+
+.artInner {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, transparent, rgba(11, 31, 42, 0.05));
+}
+
+@media (max-width: 900px) {
+  .grid {
+    grid-template-columns: 1fr;
+    padding: 20px;
+    gap: 16px;
+  }
+
+  .art {
+    min-height: 160px;
+  }
+}

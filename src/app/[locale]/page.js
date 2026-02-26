@@ -1,11 +1,10 @@
-import { Box } from "@mui/material";
-import { wpFetch } from "@/lib/wpFetch";
-import { ALL_NEWS } from "@/lib/queries";
 import Hero from "@/components/Hero/Hero";
 import Spacer from "@/components/Spacer/Spacer";
 import HomeAbout from "@/sections/HomeAbout/HomeAbout";
-import { wpLangFromLocale } from "@/lib/lang";
 import HomeNews from "@/sections/HomeNews/HomeNews";
+import { ALL_NEWS } from "@/lib/queries";
+import { wpFetch } from "@/lib/wpFetch";
+import { wpLangFromLocale } from "@/lib/lang";
 
 export default async function Page({ params }) {
   const { locale } = await params;
@@ -18,11 +17,12 @@ export default async function Page({ params }) {
   });
 
   return (
-    <Box component="main">
+    <div component="main">
       <Hero />
       <Spacer size={{ mobile: "md", desktop: "xl" }} />
       <HomeAbout locale={locale} />
+      <Spacer size={{ mobile: "md", desktop: "xl" }} />
       {data?.posts?.nodes?.length ? <HomeNews data={data} locale={locale} /> : null}
-    </Box>
+    </div>
   );
 }
