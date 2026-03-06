@@ -29,7 +29,7 @@ export default async function NewsPost({ params, backHref, backLabel }) {
           ← {backLabel}
         </a>
 
-        {p.date ? <div className={classes.date}>{fmtDate(p.date)}</div> : null}
+        {/* {p.date ? <div className={classes.date}>{fmtDate(p.date)}</div> : null} */}
       </div>
 
       <Typography variant="h2" className={classes.title} data-aos="fade-up">

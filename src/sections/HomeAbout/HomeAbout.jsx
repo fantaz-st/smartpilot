@@ -17,7 +17,7 @@ const copy = {
     p2: "The system enables virtual navigation and the review of real routes, anchorages, depths and maritime hazards through an intuitive user interface. With scientific data integration and the creation of open metadata, SMARTPILOT builds scalable knowledge infrastructure for safer navigation, education and coastal zone management.",
     p3: "The project is expected to contribute to reducing maritime accidents, strengthening digital literacy, and improving the local tourism offering.",
     cta: "More about the project",
-    href: "/en/project/about-the-project",
+    href: "/en/project/about",
   },
 };
 

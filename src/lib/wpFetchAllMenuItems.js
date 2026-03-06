@@ -2,6 +2,8 @@ import { MENU_PAGE } from "./queries";
 import { wpFetch } from "./wpFetch";
 
 export async function wpFetchAllMenuItems(name) {
+  if (!name) return [];
+
   let after = null;
   const all = [];
 

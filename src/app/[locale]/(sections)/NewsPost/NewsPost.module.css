@@ -52,6 +52,7 @@
 
 .content {
   max-width: 860px;
+  margin-top: 3rem;
 }
 
 @media (max-width: 900px) {

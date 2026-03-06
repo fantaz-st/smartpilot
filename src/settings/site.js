@@ -3,8 +3,8 @@ const site = {
   description: "Digitalni peljar i interaktivni sustav za navigaciju i peljarenje malih plovila",
   locale: "en",
   menu: {
-    hr: "smartpilot-hr",
-    en: "smartpilot-en",
+    hr: "main-menu-hr",
+    en: "main-menu-en",
   },
 
   header: {

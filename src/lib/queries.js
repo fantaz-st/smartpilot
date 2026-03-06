@@ -1,16 +1,11 @@
 export const LATEST_POSTS = `
-  query Latest($first: Int = 6, $terms: [String!]!, $lang: LanguageCodeFilterEnum!) {
+  query Latest($first: Int = 6, $lang: LanguageCodeFilterEnum!) {
     posts(
       first: $first
       where: {
         status: PUBLISH
         orderby: { field: DATE, order: DESC }
         language: $lang
-        taxQuery: {
-          taxArray: [
-            { taxonomy: PROJECTSITE, field: SLUG, terms: $terms, operator: IN }
-          ]
-        }
       }
     ) {
       nodes {
@@ -41,7 +36,6 @@ export const ALL_NEWS = `
     $year: Int,
     $month: Int,
     $order: OrderEnum = DESC,
-    $terms: [String!]!,
     $lang: LanguageCodeFilterEnum!
   ) {
     posts(
@@ -55,11 +49,6 @@ export const ALL_NEWS = `
         tag: $tag
         dateQuery: { year: $year, month: $month }
         language: $lang
-        taxQuery: {
-          taxArray: [
-            { taxonomy: PROJECTSITE, field: SLUG, terms: $terms, operator: IN }
-          ]
-        }
       }
     ) {
       pageInfo { hasNextPage endCursor }
@@ -76,18 +65,13 @@ export const ALL_NEWS = `
 `;
 
 export const POST_BY_SLUG = `
-  query PostBySlug($slug: String!, $terms: [String!]!, $lang: LanguageCodeFilterEnum!) {
+  query PostBySlug($slug: String!, $lang: LanguageCodeFilterEnum!) {
     posts(
       first: 1
       where: {
         status: PUBLISH
         language: $lang
         name: $slug
-        taxQuery: {
-          taxArray: [
-            { taxonomy: PROJECTSITE, field: SLUG, terms: $terms, operator: IN }
-          ]
-        }
       }
     ) {
       nodes {
@@ -110,31 +94,13 @@ export const POST_BY_SLUG = `
   }
 `;
 
-/* export const POST_BY_SLUG = `
-  query PostBySlug($slug: ID!) {
-    post(id: $slug, idType: SLUG) {
-      id
-      title
-      date
-      modified
-      featuredImage { node { sourceUrl altText } }
-      blocks(attributes: true, dynamicContent: true)
-    }
-  }
-`; */
-
 export const ALL_PAGES = `
-  query AllPages($first: Int = 200, $terms: [String!]!, $lang: LanguageCodeFilterEnum!) {
+  query AllPages($first: Int = 200, $lang: LanguageCodeFilterEnum!) {
     pages(
       first: $first
       where: {
         status: PUBLISH
         language: $lang
-        taxQuery: {
-          taxArray: [
-            { taxonomy: PROJECTSITE, field: SLUG, terms: $terms, operator: IN }
-          ]
-        }
       }
     ) {
       nodes {
@@ -156,15 +122,10 @@ export const ALL_PAGES = `
 `;
 
 export const ALL_PAGES_ALT = `
-  query AllPagesAlt($terms: [String!]!) {
+  query AllPagesAlt {
     pages(
       where: {
         status: PUBLISH
-        taxQuery: {
-          taxArray: [
-            { taxonomy: PROJECTSITE, field: SLUG, terms: $terms, operator: IN }
-          ]
-        }
       }
     ) {
       nodes {
@@ -173,16 +134,13 @@ export const ALL_PAGES_ALT = `
         slug
         title
         uri
-        projectSites {
-          nodes { slug }
-        }
       }
     }
   }
 `;
 
 export const PAGE_BY_PATH = `
-  query PageByPath($path: ID!, $terms: [String!]!) {
+  query PageByPath($path: ID!) {
     page(id: $path, idType: URI) {
       id
       slug
@@ -218,12 +176,10 @@ export const PAGE_BY_PATH = `
           }
         }
       }
-
-      projectSites(where: { slug: $terms }) { nodes { slug } }
     }
   }
 `;
-// new, paginated menu query
+
 export const MENU_PAGE = `
   query MenuPage($name: ID!, $after: String) {
     menu(id: $name, idType: NAME) {

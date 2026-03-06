@@ -9,7 +9,6 @@ import MenuIcon from "@mui/icons-material/Menu";
 import CloseIcon from "@mui/icons-material/Close";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import { useEffect, useMemo, useState } from "react";
-import createDataTree from "@/functions/createDataTree";
 import LanguageSwitch from "../LanguageSwitch/LanguageSwitch";
 
 const Header = ({ menuItems = [], locale }) => {
@@ -17,7 +16,7 @@ const Header = ({ menuItems = [], locale }) => {
   const [expanded, setExpanded] = useState({});
   const [scrolled, setScrolled] = useState(false);
 
-  const menuTree = useMemo(() => createDataTree(menuItems), [menuItems]);
+  const menuTree = useMemo(() => menuItems, [menuItems]);
 
   const openDrawer = () => setOpen(true);
 
@@ -77,7 +76,6 @@ const Header = ({ menuItems = [], locale }) => {
         <nav className={classes.menuDesktop}>
           {menuTree.map((item) => {
             const hasChildren = item.childNodes?.length > 0;
-
             return (
               <div key={item.databaseId} className={classes.menuItem}>
                 <Link href={item.uri} className={classes.link}>
@@ -98,7 +96,8 @@ const Header = ({ menuItems = [], locale }) => {
             );
           })}
         </nav>
-        <LanguageSwitch locale={locale}/>
+
+        <LanguageSwitch locale={locale} />
 
         <div className={classes.menuMobile}>
           <IconButton aria-label="Open menu" onClick={openDrawer} className={classes.iconBtn}>
@@ -118,7 +117,7 @@ const Header = ({ menuItems = [], locale }) => {
 
           <div className={classes.drawerNav}>
             {menuTree.map((item) => {
-              const hasChildren = item.childNodes?.length > 0;
+              const hasChildren = item.children?.length > 0;
               const isOpen = !!expanded[item.databaseId];
 
               return (
@@ -142,13 +141,8 @@ const Header = ({ menuItems = [], locale }) => {
 
                   {hasChildren && (
                     <div className={`${classes.drawerSub} ${isOpen ? classes.drawerSubOpen : ""}`}>
-                      {item.childNodes.map((child) => (
-                        <Link
-                          key={child.databaseId}
-                          href={child.uri}
-                          className={classes.drawerSubLink}
-                          onClick={closeDrawer}
-                        >
+                      {item.children.map((child) => (
+                        <Link key={child.databaseId} href={child.uri} className={classes.drawerSubLink} onClick={closeDrawer}>
                           {child.label}
                         </Link>
                       ))}

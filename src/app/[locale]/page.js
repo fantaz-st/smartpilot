@@ -10,7 +10,6 @@ export default async function Page({ params }) {
   const { locale } = await params;
 
   const data = await wpFetch(ALL_NEWS, {
-    terms: [process.env.SITE_KEY],
     lang: wpLangFromLocale(locale),
     first: 6,
     order: "DESC",
