@@ -1,97 +1,20 @@
 import site from "@/settings/site";
-import classes from "./Hero.module.css";
-import Image from "next/image";
-import { Container, Stack, Typography, Button } from "@mui/material";
-
-const getAlignClass = (align) => {
-  const v = align?.vertical || "center";
-  const h = align?.horizontal || "left";
-  return `${classes[`v_${v}`]} ${classes[`h_${h}`]}`;
-};
-
-const getOverlay = (overlay) => {
-  if (!overlay?.enabled) return "none";
-  if (overlay.gradient && overlay.color) return `${overlay.gradient}, ${overlay.color}`;
-  if (overlay.gradient) return overlay.gradient;
-  if (overlay.color) return overlay.color;
-  return "rgba(0,0,0,0.45)";
-};
+import BackgroundHero from "./BackgroundHero/BackgroundHero";
+import SplitHero from "./SplitHero/SplitHero";
 
 export default function Hero({ locale }) {
   const hero = site.hero;
-  if (!hero || hero.variant !== "background") return null;
 
-  const heightDesktop = hero.height?.desktop || "100vh";
-  const heightMobile = hero.height?.mobile || "70vh";
+  if (!hero?.variant) return null;
 
-  const bg = hero.background || {};
-  const overlay = getOverlay(hero.overlay);
-  const alignClass = getAlignClass(hero.align);
+  switch (hero.variant) {
+    case "background":
+      return <BackgroundHero locale={locale} hero={hero} />;
 
-  const title = hero.content?.[locale]?.title || site.name;
-  const subtitle = hero.content?.[locale]?.subtitle || site.description;
-  const kicker = hero.content?.[locale]?.kicker;
+    case "split":
+      return <SplitHero locale={locale} hero={hero} />;
 
-  const cta = hero.content?.cta;
-
-  const style = {
-    ["--hero-h-desktop"]: heightDesktop,
-    ["--hero-h-mobile"]: heightMobile,
-    ["--hero-overlay"]: overlay,
-  };
-
-  return (
-    <section className={classes.wrap} style={style}>
-      <div className={classes.bg}>
-        {bg.type === "video" ? (
-          <video className={classes.video} src={bg.src} autoPlay muted loop playsInline />
-        ) : (
-          <Image
-            src={bg.src}
-            alt={bg.alt || ""}
-            fill
-            priority
-            className={classes.image}
-            sizes="100vw"
-            style={{
-              objectFit: bg.size || "cover",
-              objectPosition: bg.position || "center center",
-            }}
-          />
-        )}
-      </div>
-
-      <div className={classes.overlay} />
-
-      <Container className={classes.container}>
-        <div className={`${classes.content} ${alignClass}`}>
-          <Stack spacing={2} className={classes.stack}>
-            {kicker ? (
-              <Typography className={classes.kicker} component="div" data-aos="fade-up">
-                {kicker}
-              </Typography>
-            ) : null}
-
-            <Typography variant="h1" component="h1" className={classes.title} data-aos="fade-up" data-aos-delay={kicker ? "100" : "0"}>
-              {title}
-            </Typography>
-
-            {subtitle ? (
-              <Typography variant="body1" component="p" className={classes.subtitle} data-aos="fade-up" data-aos-delay={kicker ? "200" : "100"}>
-                {subtitle}
-              </Typography>
-            ) : null}
-
-            {cta?.href && cta?.label ? (
-              <div className={classes.actions}>
-                <Button variant="contained" href={cta.href}>
-                  {cta.label}
-                </Button>
-              </div>
-            ) : null}
-          </Stack>
-        </div>
-      </Container>
-    </section>
-  );
+    default:
+      return null;
+  }
 }

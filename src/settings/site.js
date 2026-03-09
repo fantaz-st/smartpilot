@@ -17,23 +17,39 @@ const site = {
 
   hero: {
     variant: "background",
-    height: { desktop: "80vh", mobile: "70vh" },
-    background: { type: "image", src: "/images/hero.png", alt: "SmartPilot hero" },
-    overlay: { enabled: true, gradient: "linear-gradient(to bottom, rgba(0,0,0,0.05), rgba(0,0,0,0.45))" },
+    height: { desktop: "80vh", mobile: "auto" },
+    pageBackground: "#ececef",
+    panel: {
+      background: "#f7f7f8",
+      color: "#173f8a",
+    },
+    media: {
+      type: "image",
+      src: "/images/smartpilot-hero.png",
+      alt: "SmartPilot hero",
+      size: "cover",
+      position: "center center",
+    },
     content: {
       en: {
         kicker: "project",
         title: "SMARTPILOT",
         subtitle: "Digital Pilot Book and Interactive System for Navigation and Pilotage of Small Vessels",
+        cta: {
+          href: "/en/about-project",
+          label: "Learn More",
+        },
       },
       hr: {
         kicker: "projekt",
         title: "SMARTPILOT",
         subtitle: "Digitalni peljar i interaktivni sustav za navigaciju i peljarenje malih plovila",
+        cta: {
+          href: "/hr/o-projektu",
+          label: "Saznaj više",
+        },
       },
     },
-
-    align: { vertical: "center", horizontal: "left" },
   },
 
   footer: {
@@ -63,10 +79,11 @@ const site = {
       year: "auto",
     },
   },
+
   backToTop: {
     enabled: true,
-    showAfter: 300, // px scrolled before showing
-    position: "right", // right | left
+    showAfter: 300,
+    position: "right",
   },
 };
 
