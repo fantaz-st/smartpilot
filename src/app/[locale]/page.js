@@ -1,4 +1,4 @@
-import Hero from "@/components/Hero/Hero";
+import Hero from "@/sections/Hero/Hero";
 import Spacer from "@/components/Spacer/Spacer";
 import HomeAbout from "@/sections/HomeAbout/HomeAbout";
 import HomeNews from "@/sections/HomeNews/HomeNews";
@@ -17,7 +17,7 @@ export default async function Page({ params }) {
 
   return (
     <div component="main">
-      <Hero />
+      <Hero locale={locale} />
       <Spacer size={{ mobile: "md", desktop: "xl" }} />
       <HomeAbout locale={locale} />
       <Spacer size={{ mobile: "md", desktop: "xl" }} />

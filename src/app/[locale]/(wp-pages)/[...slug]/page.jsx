@@ -13,21 +13,14 @@ import HomeIcon from "@mui/icons-material/Home";
 export const revalidate = 300;
 
 export default async function WpPage(props) {
-  const { slug, locale } = await props.params;
+  const { slug } = await props.params;
   const segments = Array.isArray(slug) ? slug : [slug].filter(Boolean);
   const path = `/${segments.join("/")}/`;
 
-  const pageData = await wpFetch(PAGE_BY_PATH, {
-    path,
-    terms: [process.env.SITE_KEY],
-    /*     lang: wpLangFromLocale(locale),
-     */
-  });
+  const pageData = await wpFetch(PAGE_BY_PATH, { path });
 
   const page = pageData?.page;
   if (!page) return notFound();
-
-  if (process.env.SITE_KEY && page.projectSites && !page.projectSites.nodes?.length) return notFound();
 
   const blocks = Array.isArray(page.blocks) ? page.blocks : typeof page.blocks === "string" ? JSON.parse(page.blocks) : [];
 

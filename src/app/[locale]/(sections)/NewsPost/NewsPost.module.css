@@ -28,7 +28,6 @@
 }
 
 .title {
-  max-width: 900px;
   font-weight: 900;
   letter-spacing: -0.02em;
   line-height: 1.08;
@@ -51,7 +50,6 @@
 }
 
 .content {
-  max-width: 860px;
   margin-top: 3rem;
 }
 

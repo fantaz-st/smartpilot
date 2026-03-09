@@ -12,10 +12,12 @@ export default async function LocaleLayout({ children, params }) {
   const menuItems = createDataTree(flat);
 
   return (
-    <>
+    <div className="layout">
       <Header menuItems={menuItems} locale={locale} />
-      {children}
+
+      <main className="content">{children}</main>
+
       <Footer menuItems={menuItems} locale={locale} />
-    </>
+    </div>
   );
 }

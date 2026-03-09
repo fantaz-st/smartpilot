@@ -1,23 +1,23 @@
-import { Box, Button, Container, Typography } from "@mui/material";
+import { Button, Container, Typography } from "@mui/material";
 import Link from "next/link";
 import classes from "./HomeAbout.module.css";
 
 const copy = {
   hr: {
     title: "O projektu",
-    p1: "SMARTPILOT je interdisciplinarni projekt usmjeren na digitalizaciju pomorskih informacijskih sustava i povećanje sigurnosti plovidbe malih (non-SOLAS) plovila u Jadranu. Projekt odgovara na ograničenja postojećih analognih alata razvojem naprednog digitalnog peljara koji integrira 360° snimke, GIS i GPS tehnologije.",
-    p2: "Sustav omogućuje virtualnu navigaciju i pregled stvarnih ruta, sidrišta, dubina i pomorskih opasnosti kroz intuitivno korisničko sučelje. Uz znanstvenu integraciju podataka i izradu otvorenih metapodataka, SMARTPILOT stvara skalabilnu infrastrukturu znanja za sigurniju plovidbu, edukaciju i upravljanje obalnim prostorom.",
-    p3: "Očekuje se da će projekt doprinijeti smanjenju pomorskih nesreća, jačanju digitalne pismenosti te unaprjeđenju lokalne turističke ponude.",
+    p1: "Trenutno stanje istraživanja (State of the Art) U pomorskom sektoru, digitalna navigacija za male brodove i rekreativna plovila još uvijek je nedovoljno razvijena u odnosu na komercijalne i profesionalne sustave. Globalno prisutne platforme poput Navionics, iSailor i Garmin Marine osiguravaju navigacijske informacije temeljem vektorskih karata, ali ne pružaju lokalizirane, vizualne i lako razumljive prikaze stvarnog stanja na terenu. To se osobito odnosi na korisnike bez formalne pomorske edukacije – vlasnike manjih plovila, turiste i rekreativne nautičare.",
+    p2: "Postojeće tekstualne publikacije poput &apos;Peljar&apos; i obalnih vodiča ne zadovoljavaju potrebe digitalno orijentiranih korisnika koji preferiraju interaktivne i multimedijalne alate (npr. Google Earth, Street View). Iako tehnologije poput dronova, 360° kamera i naprednih geoprostornih sustava već postoje, njihova primjena u kontekstu lokalne sigurnosti plovidbe još nije sustavno istražena ni integrirana.",
+    p3: "Cilj istraživanja jest razviti i validirati funkcionalni digitalni peljar koji omogućuje korisnicima pristup multimedijalnim navigacijskim informacijama temeljenim na stvarnim vizualnim podacima i geoprostornoj analitici, te istražiti njegovu učinkovitost u kontekstu sigurnosti plovidbe malih brodova.",
     cta: "Više o projektu",
     href: "/projekt/o-projektu",
   },
   en: {
-    title: "About the project",
-    p1: "SMARTPILOT is an interdisciplinary project focused on the digitalization of maritime information systems and improving the safety of navigation for small (non-SOLAS) vessels in the Adriatic. The project addresses the limitations of existing analog tools by developing an advanced digital pilot guide that integrates 360° imagery, GIS and GPS technologies.",
-    p2: "The system enables virtual navigation and the review of real routes, anchorages, depths and maritime hazards through an intuitive user interface. With scientific data integration and the creation of open metadata, SMARTPILOT builds scalable knowledge infrastructure for safer navigation, education and coastal zone management.",
-    p3: "The project is expected to contribute to reducing maritime accidents, strengthening digital literacy, and improving the local tourism offering.",
+    title: "About the Project",
+    p1: "Current state of research (State of the Art) In the maritime sector, digital navigation for small vessels and recreational boats is still insufficiently developed compared to commercial and professional systems. Globally available platforms such as Navionics, iSailor and Garmin Marine provide navigation information based on vector charts, but they do not offer localized, visual and easily understandable representations of the real conditions at sea. This is particularly relevant for users without formal maritime education – owners of small vessels, tourists and recreational boaters.",
+    p2: "Existing textual publications such as the 'Pilot Book' and coastal guides do not meet the needs of digitally oriented users who prefer interactive and multimedia tools (e.g. Google Earth, Street View). Although technologies such as drones, 360° cameras and advanced geospatial systems already exist, their application in the context of local navigation safety has not yet been systematically researched or integrated.",
+    p3: "The aim of the research is to develop and validate a functional digital pilot guide that enables users to access multimedia navigation information based on real visual data and geospatial analytics, and to examine its effectiveness in the context of navigation safety for small vessels.",
     cta: "More about the project",
-    href: "/en/project/about",
+    href: "/projekt/o-projektu",
   },
 };
 
@@ -27,39 +27,27 @@ export default function HomeAbout({ locale = "hr" }) {
   return (
     <section className={classes.wrap}>
       <Container className={classes.container}>
-        <div className={classes.panel}>
-          <div className={classes.grid}>
-            <div className={classes.left}>
-              <Typography variant="h2" className={classes.title}>
-                {t.title}
-              </Typography>
+        <Typography variant="h2" className={classes.title}>
+          {t.title}
+        </Typography>
 
-              <div className={classes.text}>
-                <Typography variant="body1" color="text.secondary" className={classes.p}>
-                  {t.p1}
-                </Typography>
-                <Typography variant="body1" color="text.secondary" className={classes.p}>
-                  {t.p2}
-                </Typography>
-                <Typography variant="body1" color="text.secondary" className={classes.p}>
-                  {t.p3}
-                </Typography>
-              </div>
-
-              <Link href={t.href} className={classes.ctaLink}>
-                <Button component="span" variant="outlined" className={classes.cta}>
-                  {t.cta}
-                </Button>
-              </Link>
-            </div>
-
-            <div className={classes.right} aria-hidden="true">
-              <div className={classes.art}>
-                <div className={classes.artInner} />
-              </div>
-            </div>
-          </div>
+        <div className={classes.text}>
+          <Typography variant="body1" color="text.secondary" mb={2}>
+            {t.p1}
+          </Typography>
+          <Typography variant="body1" color="text.secondary" mb={2}>
+            {t.p2}
+          </Typography>
+          <Typography variant="body1" color="text.secondary" mb={2}>
+            {t.p3}
+          </Typography>
         </div>
+
+        <Link href={t.href} className={classes.ctaLink}>
+          <Button component="span" variant="outlined" className={classes.cta}>
+            {t.cta}
+          </Button>
+        </Link>
       </Container>
     </section>
   );

@@ -13,12 +13,25 @@
   --space-xl: 72px;
   --space-2xl: 120px;
 
-    --header-h: 72px;
+  --header-h: 72px;
 }
 
+body {
+  background-color: #fff;
+}
 
-.main-wrapper{
+.main-wrapper {
   min-height: 100dvh;
   display: grid;
   grid-template-rows: auto 1fr auto;
+}
+
+.layout {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.content {
+  flex: 1;
 }

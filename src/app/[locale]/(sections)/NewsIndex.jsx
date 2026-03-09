@@ -7,9 +7,6 @@ import { wpLangFromLocale } from "@/lib/lang";
 export const revalidate = 300;
 
 export default async function NewsIndex({ title, locale }) {
-  const siteKey = process.env.SITE_KEY;
-  if (!siteKey) throw new Error("Missing SITE_KEY env var");
-
   const data = await wpFetch(ALL_NEWS, {
     first: 24,
     after: null,
@@ -19,7 +16,6 @@ export default async function NewsIndex({ title, locale }) {
     year: null,
     month: null,
     order: "DESC",
-    terms: [siteKey],
     lang: wpLangFromLocale(locale),
   });
 
@@ -31,7 +27,7 @@ export default async function NewsIndex({ title, locale }) {
         <Typography variant="h2" sx={{ mb: { xs: 2, md: 3 } }}>
           {title}
         </Typography>
-        <NewsGrid posts={posts} />
+        <NewsGrid posts={posts} locale={locale} />
       </Container>
     </Box>
   );
